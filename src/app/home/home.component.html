@@ -1,41 +1,39 @@
-<form [formGroup] = "mobileInputForm" (ngSubmit)="onFormSubmit()">
+<form [formGroup]="mobileInputForm" (ngSubmit)="onFormSubmit()">
   <table>
- <tr>
-   <td>Mobile Number:</td>
-   <td>
-     <input formControlName="phoneNumber"   maxlength="10" required (ngModelChange)="combinations=[]">
-     <div *ngIf="mobileInputForm.get('phoneNumber').errors  && !mobileInputForm.valid && submitted"  [ngClass] = "'error'">
-       <div *ngIf="mobileInputForm.get('phoneNumber').errors.pattern">
-         Mobile number not valid.
-       </div>
-     </div>
-   </td>
-   </tr>
+    <tr>
+      <td>Mobile Number:</td>
+      <td>
+        <input formControlName="phoneNumber" maxlength="10" required (ngModelChange)="combinations=[]">
+        <div *ngIf="mobileInputForm.get('phoneNumber').errors  && !mobileInputForm.valid && submitted"
+          [ngClass]="'error'">
+          <div *ngIf="mobileInputForm.get('phoneNumber').errors.pattern">
+            Mobile number not valid.
+          </div>
+        </div>
+      </td>
+    </tr>
 
-   <tr>
-   <td colspan="2">
-     <button type="submit">Submit</button>
-   </td>
-   </tr>
+    <tr>
+      <td colspan="2">
+        <button type="submit">Submit</button>
+      </td>
+    </tr>
   </table>
- </form>
+</form>
 
- <div *ngIf="combinations.length > 0 && !mobileInputForm.get('phoneNumber').errors  && mobileInputForm.valid && submitted">
-   Total number of combinations: {{combinations.length}}
-   <div class="combinations">
-     <div *ngFor="let combination of displayData">
-   {{combination}}
-   </div>
+<div
+  *ngIf="combinations.length > 0 && !mobileInputForm.get('phoneNumber').errors  && mobileInputForm.valid && submitted">
+  Total number of combinations: {{combinations.length}}
+  <div class="combinations">
+    <div *ngFor="let combination of displayData">
+      {{combination}}
+    </div>
   </div>
 
   <div class="pagination" *ngFor="let number of pageNumbers; let index = index; first as isFirst; last as isLast;">
     <a (click)="previousPage()" *ngIf="isFirst">&laquo;</a>
-
-    <a (click)="selectPage(number)" [ngStyle]="{'background-color':number == selectedPage ? '#ddd' : '' }">{{number}}</a>
-
+    <a (click)="selectPage(number)"
+      [ngStyle]="{'background-color':number == selectedPage ? '#ddd' : '' }">{{number}}</a>
     <a (click)="nextPage()" *ngIf="isLast">&raquo;</a>
-    </div>
-
+  </div>
 </div>
-
-
